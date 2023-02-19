@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    font-family: serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+@layer base {
+    ul, ol {
+        list-style: revert;
+        margin: revert;
+        padding: revert;
+    }
+
+    a {
+        text-decoration: revert;
+    }
+}

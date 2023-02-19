@@ -13,12 +13,12 @@
     })
 </script>
 
-<div class="main">
-    <div class="top">
-        <div class="viewer-editor">
+<div class="flex flex-col p-10">
+    <div class="flex flex-row flex-wrap">
+        <div class="flex flex-row">
             <canvas id="canvas" width="800" height="800"></canvas>
         </div>
-        <div class="right">
+        <div class="flex flex-col overflow-y-auto flex-grow ml-10 mr-10 p-1">
             <Stats/>
             <Tab/>
         </div>
@@ -27,22 +27,6 @@
 <Alert/>
 
 <style>
-    .main {
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-    }
-
-    .right {
-        display: flex;
-
-        flex-direction: column;
-        overflow-y: auto;
-        flex-grow: 1;
-        margin: 0 10px;
-        padding: 1px;
-    }
-
     pre {
         outline: 1px solid black;
         background-color: lightgrey;
@@ -50,20 +34,5 @@
         max-height: 300px;
         overflow: auto;
         padding: 10px;
-    }
-
-    .top {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    .end {
-        flex-grow: 1;
-    }
-
-    .viewer-editor {
-        display: flex;
-        flex-direction: row;
     }
 </style>

@@ -1,7 +1,1 @@
-<div></div>
-
-<style>
-    div {
-        border: 1px solid grey;
-    }
-</style>
+<div class="border border-gray-400"></div>

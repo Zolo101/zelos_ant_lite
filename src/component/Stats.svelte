@@ -14,7 +14,7 @@
     $: antPural = ant > 1 ? "ants" : "ant";
 </script>
 
-<div class="stats">
+<div class="flex flex-row">
     {#key avgms}
         <!--        <p>each tick takes {avgms}ms, each iteration takes {avgiterationms}µs</p>-->
         <p>Each tick takes {avgms.toLocaleString(undefined, {minimumFractionDigits: 3, maximumFractionDigits: 3})}ms</p>
@@ -24,12 +24,7 @@
 </div>
 
 <style>
-    .stats {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .stats p {
-        margin: 10px 50px;
+    p {
+        @apply my-6 mx-12;
     }
 </style>

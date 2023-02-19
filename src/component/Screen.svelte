@@ -8,11 +8,4 @@
     export let scale: number = 1;
 </script>
 
-<img id="screen-{id}" src={src} width={width * scale} height={height * scale}/>
-
-<style>
-    img {
-        image-rendering: pixelated;
-        margin: 2px;
-    }
-</style>
+<img class="[image-rendering: pixelated] m-2" id="screen-{id}" src={src} width={width * scale} height={height * scale}/>

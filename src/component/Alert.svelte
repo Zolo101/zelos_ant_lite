@@ -11,47 +11,8 @@
     }
 </script>
 
-<div class="background" class:hidden={!show}></div>
-<div class="alert" class:hidden={!show}>
-    <p class="text">{$text}</p>
-    <p class="close button" on:click={() => close()}>OK!</p>
+<div class="absolute top-0 left-0 w-full h-full z-10 bg-black" class:hidden={!show}></div>
+<div class="absolute outline outline-1 outline-black p-10 top-1/2 left-1/2 w-2/6 z-10 bg-gray-400" class:hidden={!show}>
+    <p class="text-center h-4/5">{$text}</p>
+    <p class="text-center button" on:click={() => close()}>OK!</p>
 </div>
-
-<style>
-    .alert {
-        position: absolute;
-        outline: 1px solid black;
-        padding: 10px;
-        top: 30%;
-        left: 40%;
-        width: 20%;
-        /*height: 40%;*/
-        z-index: 101;
-
-        background-color: rgba(160, 160, 160, 1);
-    }
-
-    .background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 100;
-        background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .text {
-        text-align: center;
-        height: 80%;
-    }
-
-    .close {
-        text-align: center;
-        /*width: 100px;*/
-    }
-
-    .hidden {
-        display: none;
-    }
-</style>
