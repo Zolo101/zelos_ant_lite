@@ -13,23 +13,25 @@
 		"asbuild": "npm run asbuild:debug && npm run asbuild:release"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "next",
-		"@sveltejs/adapter-static": "^1.0.0-next.39",
-		"@sveltejs/kit": "^1.0.0-next.415",
-		"@types/ramda": "^0.28.15",
-		"assemblyscript": "^0.20.18",
-		"svelte": "^3.44.0",
-		"svelte-check": "^2.7.1",
-		"svelte-preprocess": "^4.10.6",
-		"tslib": "^2.3.1",
-		"typescript": "^4.7.4",
-		"vite": "^3.0.0"
+		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-static": "^2.0.1",
+		"@sveltejs/kit": "^1.7.2",
+		"@types/ramda": "^0.28.23",
+		"assemblyscript": "^0.27.0",
+		"svelte": "^3.55.1",
+		"svelte-check": "^3.0.3",
+		"svelte-preprocess": "^5.0.1",
+		"tslib": "^2.5.0",
+		"typescript": "^4.9.5",
+		"vite": "^4.1.2"
 	},
 	"type": "module",
 	"dependencies": {
-		"blockly": "^8.0.5",
-		"dexie": "^3.2.2",
+		"add": "^2.0.6",
+		"blockly": "8.0.5",
+		"dexie": "^3.2.3",
 		"ramda": "^0.28.0",
-		"twgl.js": "^5.2.0"
+		"twgl.js": "^5.3.0",
+		"webgl-lint": "^1.10.1"
 	}
 }
