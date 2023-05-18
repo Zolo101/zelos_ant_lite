@@ -3,12 +3,30 @@
 @tailwind utilities;
 
 html {
-    font-family: serif;
+    @apply font-sans;
 }
 
 html, body {
-    height: 100%;
+    @apply h-full m-0;
+    background: linear-gradient(grey 0%, darkgrey 20%) no-repeat, darkgrey;
 }
+
+canvas {
+    @apply outline-black max-w-[800px] max-h-[800px];
+}
+
+.main {
+    @apply flex flex-col p-2.5;
+}
+
+.button {
+    @apply p-2.5 m-1 bg-gray-300 outline-black text-center rounded shadow transition-colors cursor-pointer;
+}
+
+.button:hover {
+    @apply bg-gray-400;
+}
+
 
 @layer base {
     ul, ol {
