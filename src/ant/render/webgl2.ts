@@ -38,6 +38,7 @@ export default class Renderer {
             height: 1,
         })
 
+        window.addEventListener("updateTileEvent", this.updateColours)
         requestAnimationFrame(() => this.render())
     }
 
