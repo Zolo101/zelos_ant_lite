@@ -3,10 +3,8 @@
 </script>
 
 <div class="credits">
-    <img src="zelos_ant_3x.png" alt="Zelo's Ant Logo"/>
 <!--  TODO: Changelog  -->
-    <p class="credit">zelo's ant 1.2.0</p>
-    <p class="credit">Made by Zelo101</p>
+    <p class="credit">Made by Zelo101, version 1.2.0. Check out the <Link href="https://github.com/Zolo101/zelos_ant">Source Code</Link>!</p>
     <p>Libraries used:</p>
     <ul>
         <li><Link href="https://twgljs.org/">TWGL</Link></li>

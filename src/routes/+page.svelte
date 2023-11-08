@@ -4,6 +4,7 @@
     import Tab from "../component/Tab.svelte";
     import Alert from "../component/Alert.svelte";
     import Stats from "../component/Stats.svelte";
+    import Controls from "../component/page/Controls.svelte";
 
     onMount(() => {
         const canvas = document.getElementById("canvas") as HTMLCanvasElement;
@@ -14,12 +15,17 @@
 </script>
 
 <div class="flex flex-col p-10">
-    <div class="flex flex-row flex-wrap">
-        <div class="flex flex-row">
+    <img src="zelos_ant.png" width="273" height="50" alt="Zelo's Ant Logo"/>
+    <div class="flex flex-row">
+        <div class="flex flex-col w-[800px] gap-1">
             <canvas id="canvas" width="800" height="800"></canvas>
+            <Stats/>
+            <Controls/>
+        </div>
+        <div>
+<!--            <p>###</p>-->
         </div>
         <div class="flex flex-col overflow-y-auto flex-grow ml-10 mr-10 p-1">
-            <Stats/>
             <Tab/>
         </div>
     </div>
@@ -34,5 +40,10 @@
         max-height: 300px;
         overflow: auto;
         padding: 10px;
+    }
+
+    img {
+        image-rendering: pixelated;
+        @apply pb-5;
     }
 </style>

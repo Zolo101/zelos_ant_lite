@@ -14,17 +14,12 @@
     $: antPural = ant > 1 ? "ants" : "ant";
 </script>
 
-<div class="flex flex-row">
+<div class="flex flex-row justify-evenly">
     {#key avgms}
         <!--        <p>each tick takes {avgms}ms, each iteration takes {avgiterationms}µs</p>-->
         <p>Each tick takes {avgms.toLocaleString(undefined, {minimumFractionDigits: 3, maximumFractionDigits: 3})}ms</p>
         <p>{ant} {antPural} moving around</p>
         <p>Iterations: {Game.iterations.toLocaleString()}</p>
+        <p>Iterations per tick: {Game.iterationsPerTick.toLocaleString()}</p>
     {/key}
 </div>
-
-<style>
-    p {
-        @apply my-6 mx-12;
-    }
-</style>
