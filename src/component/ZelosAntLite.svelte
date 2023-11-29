@@ -50,7 +50,6 @@
 
     onMount(() => {
         dialog = document.querySelector("#help") as HTMLDialogElement;
-        dialog.showModal()
         const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
         // const ctx = canvas.getContext("canvas") as CanvasRenderingContext2D;
         const gl2 = canvas.getContext("webgl2") as WebGL2RenderingContext;

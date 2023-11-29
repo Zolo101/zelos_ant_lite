@@ -17,7 +17,8 @@
 		"package": "svelte-kit package",
 		"preview": "vite preview",
 		"check": "svelte-check --tsconfig tsconfig.json",
-		"check:watch": "svelte-check --tsconfig tsconfig.json --watch"
+		"check:watch": "svelte-check --tsconfig tsconfig.json --watch",
+		"install": "npm run build"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.1.1",
@@ -38,5 +39,11 @@
 	"dependencies": {
 		"twgl.js": "^5.5.3",
 		"webgl-lint": "^1.11.3"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/globals.d.ts",
+			"svelte": "./dist/index.js"
+		}
 	}
 }
