@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Tile from "../ant/tile";
+    import Tile from "$lib/ant/tile";
 
     export let tiles: Tile[];
 
