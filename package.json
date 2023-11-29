@@ -18,7 +18,7 @@
 		"preview": "vite preview",
 		"check": "svelte-check --tsconfig tsconfig.json",
 		"check:watch": "svelte-check --tsconfig tsconfig.json --watch",
-		"install": "npm run build"
+		"install": "npx svelte-package"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.1.1",
