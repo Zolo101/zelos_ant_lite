@@ -1,1 +1,0 @@
-<div class="border border-gray-400"></div>

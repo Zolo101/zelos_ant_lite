@@ -1,15 +1,17 @@
 class Tile {
-    // name: string
-    // colour: string
-    colour: [number, number, number]
+    id: number
+    colour: RGB
     // TODO: remove triggers
-    triggers: string[]
+    trigger: string
 
-    // constructor(name: string, colour: Tile["colour"], triggers: string[]) {
-    constructor(colour: Tile["colour"], triggers: string[]) {
-        // this.name = name
+    constructor(id: number, colour: Tile["colour"], trigger: string) {
+        this.id = id
         this.colour = colour
-        this.triggers = triggers
+        this.trigger = trigger
+    }
+
+    getRGB() {
+        return `rgb(${this.colour[0]}, ${this.colour[1]}, ${this.colour[2]})`
     }
 }
 

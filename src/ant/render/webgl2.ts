@@ -18,7 +18,7 @@ export default class Renderer {
         const program = twgl.createProgram(gl, [vertexShader, fragmentShader])
         this.programInfo = twgl.createProgramInfoFromProgram(gl, program)
         this.objects = [];
-        this.tiles = new Uint8ClampedArray(800 * 800)
+        this.tiles = new Uint8ClampedArray(Game.width * Game.height)
         this.bufferInfo = twgl.primitives.createXYQuadBufferInfo(gl);
 
         this.tileTexture = twgl.createTexture(gl, {
@@ -33,8 +33,10 @@ export default class Renderer {
             min: gl.NEAREST,
             format: gl.RGB,
             // TODO: Set limit for colours (1024)
-            src: new Uint8ClampedArray(3 * 1024), // support 1024 colours
-            width: 1024,
+            // src: new Uint8ClampedArray(3 * 1024), // support 1024 colours
+            src: this.createColourTexture(), // support 256 colours
+            // width: 1024,
+            width: 256,
             height: 1,
         })
 
@@ -43,9 +45,17 @@ export default class Renderer {
     }
 
     updateColours() {
-        let texture = new Uint8ClampedArray(3 * 1024)
+        // let texture = new Uint8ClampedArray(3 * 1024)
+        let texture = this.createColourTexture()
         texture.set(Game.colours.flat(), 0)
-        twgl.setTextureFromArray(this.gl, this.colours, texture, {format: this.gl.RGB, width: 1024, height: 1})
+        // twgl.setTextureFromArray(this.gl, this.colours, texture, {format: this.gl.RGB, width: 1024, height: 1})
+        twgl.setTextureFromArray(this.gl, this.colours, texture, {format: this.gl.RGB, width: 256, height: 1})
+    }
+
+    createColourTexture() {
+        // return new Uint8ClampedArray(3 * Game.width * Game.height)
+        // return new Uint8ClampedArray(3 * 1024) // support 1024 colours
+        return new Uint8ClampedArray(3 * 256) // support 256 colours
     }
 
     render() {
@@ -60,12 +70,12 @@ export default class Renderer {
         }
 
         // these convert from pixels to clip space
-        twgl.m4.ortho(0, 800, 800, 0, -1, 1, matrix)
+        twgl.m4.ortho(0, Game.width, Game.height, 0, -1, 1, matrix)
 
         // these move and scale the unit quad into the size we want
         // in the target as pixels
         twgl.m4.translate(matrix, [0, 0, 0], matrix);
-        twgl.m4.scale(matrix, [800, 800, 1], matrix);
+        twgl.m4.scale(matrix, [Game.width, Game.height, 1], matrix);
 
         this.gl.useProgram(this.programInfo.program);
         twgl.setBuffersAndAttributes(this.gl, this.programInfo, this.bufferInfo);

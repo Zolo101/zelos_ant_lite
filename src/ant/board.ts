@@ -1,8 +1,6 @@
 import Ant from "./ant";
 import Game from "./game";
 
-// import { cellsToImage } from "./assembly/wasm/release";
-
 class Board {
     width: number
     height: number
@@ -43,19 +41,6 @@ class Board {
 
     addAnt(x: number, y: number) {
         this.ants.push(new Ant({ x, y }))
-    }
-
-    output() {
-        // console.log(Game.colours, this.cells)
-
-        // web workers are too slow before of postMessage
-        // cellsToImage is webassembly version (5.5ms)
-        // vanillaJs seems to be faster right now (3.3ms)
-        // webgl2 + vanillaJs (2.4ms)
-        // webgl2 + GPU (0.001ms)
-
-        // return cellsToImage(Game.colours, this.image, this.cells);
-        // return cellsToImage_vanillajs(Game.colours, this.image, this.cells);
     }
 }
 

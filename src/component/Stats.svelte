@@ -1,25 +1,20 @@
 <script lang="ts">
-    import Game from "../ant/game";
-    import { sum } from "ramda";
+    import Tile from "../ant/tile";
 
-    export let avgms = 0;
-    export let ant = 0;
+    export let tiles: Tile[];
 
-    setInterval(() => {
-        avgms = sum(Game.fpsHistory) / Game.fpsHistory.length
-        ant = Game.board.ants.length
-        // avgiterationms = ((avgms / Game.iterationsPerTick) * 1000)
-    }, 100)
-
-    $: antPural = ant > 1 ? "ants" : "ant";
+    const colorBasedOnBackground = (rgb: RGB) => {
+        const yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
+        return (yiq >= 128) ? "black" : "white";
+    }
 </script>
 
-<div class="flex flex-row justify-evenly">
-    {#key avgms}
-        <!--        <p>each tick takes {avgms}ms, each iteration takes {avgiterationms}µs</p>-->
-        <p>Each tick takes {avgms.toLocaleString(undefined, {minimumFractionDigits: 3, maximumFractionDigits: 3})}ms</p>
-        <p>{ant} {antPural} moving around</p>
-        <p>Iterations: {Game.iterations.toLocaleString()}</p>
-        <p>Iterations per tick: {Game.iterationsPerTick.toLocaleString()}</p>
-    {/key}
+<p class="font-bold text-2xl text-center">Rules</p>
+<div class="flex flex-wrap justify-center content-start overflow-y-auto h-[50vh] gap-1.5 p-2">
+    {#each tiles as tile}
+        <div class="flex justify-center items-center font-bold w-8 h-8 outline outline-2 outline-black text-white text-xl" style="background-color: {tile.getRGB()}">
+            <p style="color: {colorBasedOnBackground(tile.colour)}">{tile.trigger}</p>
+<!--            <span class="relative inline w-0 h-0 text-right -left-[20px] -top-[12px] text-[0.5em] invert contrast-[1e2] grayscale">{i}</span>-->
+        </div>
+    {/each}
 </div>

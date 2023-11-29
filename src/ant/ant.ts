@@ -1,7 +1,5 @@
 import Game from "./game";
 
-// import { moveForward_wasm } from "./assembly/wasm/release";
-
 enum AntRotation {
     North = 0,
     East = 1,

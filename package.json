@@ -1,23 +1,29 @@
 {
-	"name": "zelosant",
-	"version": "1.2.0",
+	"name": "zelos.ant.lite",
+	"version": "0.1.0",
+	"license": "MIT",
+	"keywords": [
+		"svelte",
+		"langtons-ant",
+		"langton-ant"
+	],
+	"author": "Zelo101",
+	"bugs": {
+		"url": ""
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
 		"package": "svelte-kit package",
 		"preview": "vite preview",
 		"check": "svelte-check --tsconfig tsconfig.json",
-		"check:watch": "svelte-check --tsconfig tsconfig.json --watch",
-		"asbuild:debug": "asc src/ant/assembly/index.ts --target debug",
-		"asbuild:release": "asc src/ant/assembly/index.ts --target release",
-		"asbuild": "npm run asbuild:debug && npm run asbuild:release"
+		"check:watch": "svelte-check --tsconfig tsconfig.json --watch"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.1.1",
 		"@sveltejs/adapter-static": "^2.0.3",
 		"@sveltejs/kit": "^1.27.3",
-		"@types/ramda": "^0.28.25",
-		"assemblyscript": "^0.27.15",
+		"@sveltejs/package": "^2.2.3",
 		"autoprefixer": "^10.4.16",
 		"postcss": "^8.4.31",
 		"svelte": "^3.59.2",
@@ -30,10 +36,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"add": "^2.0.6",
-		"blockly": "8.0.5",
-		"dexie": "^3.2.4",
-		"ramda": "^0.28.0",
 		"twgl.js": "^5.5.3",
 		"webgl-lint": "^1.11.3"
 	}
