@@ -1,5 +1,5 @@
 <script lang="ts">
-    import ZelosAntLite from "$lib/ZelosAntLite.svelte";
+    import ZelosAntLite from "../component/ZelosAntLite.svelte";
 </script>
 
 <ZelosAntLite/>

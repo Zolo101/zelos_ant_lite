@@ -1,9 +1,9 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import Stats from "./Stats.svelte";
-    import Game from "$lib/ant/game";
-    import Tile from "$lib/ant/tile";
-    import { main } from "$lib/ant";
+    import { main } from "../ant";
+    import Stats from "../component/Stats.svelte";
+    import Game from "../ant/game";
+    import Tile from "../ant/tile";
 
     const choose = <T>(choices: T[]) => choices[~~(Math.random() * choices.length)]
     $: x = [] as Array<Tile>;
