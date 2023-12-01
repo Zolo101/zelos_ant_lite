@@ -3,7 +3,7 @@
 
     export let tiles: Tile[];
 
-    const colorBasedOnBackground = (rgb: RGB) => {
+    const colorBasedOnBackground = (rgb: RGBA) => {
         const yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
         return (yiq >= 128) ? "black" : "white";
     }

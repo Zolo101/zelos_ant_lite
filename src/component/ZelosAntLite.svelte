@@ -4,11 +4,13 @@
     import Stats from "../component/Stats.svelte";
     import Game from "../ant/game";
     import Tile from "../ant/tile";
+    import WebGPURenderer from "../ant/render/webgpu/webgpu";
+    import Renderer from "../ant/render/webgl2/webgl2";
 
     const choose = <T>(choices: T[]) => choices[~~(Math.random() * choices.length)]
     $: x = [] as Array<Tile>;
-    const chooseRGB = (): RGB => [~~(Math.random() * 255), ~~(Math.random() * 255), ~~(Math.random() * 255)]
-    const chooseFarAwayRGB = (): [RGB, RGB] => {
+    const chooseRGB = (): RGBA => [~~(Math.random() * 255), ~~(Math.random() * 255), ~~(Math.random() * 255), 255]
+    const chooseFarAwayRGB = (): [RGBA, RGBA] => {
         let a, b;
         while (RGBDistance(a = chooseRGB(), b = chooseRGB()) < 200) {}
         // let i = 0
@@ -16,18 +18,19 @@
         // console.log(i)
         return [a, b]
     }
-    const RGBDistance = (a: RGB, b: RGB) => {
+    const RGBDistance = (a: RGBA, b: RGBA) => {
         const [r1, g1, b1] = a
         const [r2, g2, b2] = b
         return Math.sqrt((r1 - r2) ** 2 + (g1 - g2) ** 2 + (b1 - b2) ** 2)
     }
-    const createGradient = (a: RGB, b: RGB, steps: number) => {
-        const gradient: RGB[] = []
+    const createGradient = (a: RGBA, b: RGBA, steps: number) => {
+        const gradient: RGBA[] = []
         for (let i = 0; i < steps; i++) {
             gradient.push([
                 a[0] + (b[0] - a[0]) * i / steps,
                 a[1] + (b[1] - a[1]) * i / steps,
                 a[2] + (b[2] - a[2]) * i / steps,
+                255,
             ])
         }
         return gradient
@@ -43,17 +46,40 @@
     let changeIteration: () => void;
     let copyButton: () => void;
     let PureMode = true;
+    let renderMode = ""; // WebGL2, WebGPU, (Nothing)
     let dialog: HTMLDialogElement;
     $: tiles = 256;
     $: iterationSlider = 0;
     $: iterations = 0;
 
-    onMount(() => {
+    function isWebGL2Supported() {
+        const canvas = document.createElement("canvas");
+        const gl = canvas.getContext("webgl2");
+        return !!gl;
+    }
+
+    const isWebGPUSupported = () => !!navigator.gpu;
+
+    onMount(async () => {
         dialog = document.querySelector("#help") as HTMLDialogElement;
         const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
+        let renderer: Renderer | WebGPURenderer
+        if (isWebGPUSupported()) {
+            const glw = canvas.getContext("webgpu");
+            renderer = await main(null, glw)
+            renderMode = "WebGPU"
+        } else if (isWebGL2Supported()) {
+            const gl2 = canvas.getContext("webgl2");
+            renderer = await main(gl2, null)
+            renderMode = "WebGL2"
+        } else {
+            // TODO: Fallback to canvas
+            renderMode = "Nothing"
+            throw new Error("WebGL2 is not supported")
+        }
         // const ctx = canvas.getContext("canvas") as CanvasRenderingContext2D;
-        const gl2 = canvas.getContext("webgl2") as WebGL2RenderingContext;
-        const renderer = main(gl2)
+        // const gl2 = canvas.getContext("webgl2");
+        // const renderer = await main(gl2, null)
 
         const generate = (save?: Save) => {
             Game.clear();
@@ -73,7 +99,7 @@
             } else {
                 // if its zero then calculate it
                 Game.iterationsPerTick = iterations ? iterations : calculateAutoIteration(tiles)
-                console.log(Game.iterationsPerTick)
+                // console.log(Game.iterationsPerTick)
                 const [a, b] = chooseFarAwayRGB()
                 const colours = createGradient(a, b, tiles)
                 for (let i = 0; i < tiles; i++) {
@@ -254,7 +280,16 @@
 <div class="flex flex-col w-[400px] gap-1">
     <canvas id="canvas" width="400" height="400"></canvas>
     <div class="flex justify-between text-xs">
-        <span>zelo's ant lite</span>
+        <div>
+            <span>zelo's ant lite</span>
+            {#if renderMode === "WebGPU"}
+                <p class="text-green-600 text-xs font-bold">{renderMode}</p>
+            {:else if renderMode === "WebGL2"}
+                <p class="text-teal-600 text-xs font-bold">{renderMode}</p>
+            {:else}
+                <p class="text-red-600 text-xs font-bold">Your browser does not support WebGL2 :(</p>
+            {/if}
+        </div>
         <span class="cursor-pointer hover:underline" on:click={newButton}>[new]</span>
         <span class="cursor-pointer hover:underline" on:click={restartButton}>[restart]</span>
         <span class="cursor-pointer hover:underline" on:click={() => dialog.showModal()}>[options]</span>

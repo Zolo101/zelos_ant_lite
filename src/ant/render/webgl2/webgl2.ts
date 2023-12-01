@@ -1,6 +1,6 @@
 import * as twgl from "twgl.js";
 import "webgl-lint";
-import Game from "../game";
+import Game from "../../game";
 import vertexShader from "./vertex.glsl?raw";
 import fragmentShader from "./fragment.glsl?raw";
 
@@ -31,7 +31,7 @@ export default class Renderer {
         this.colours = twgl.createTexture(gl, {
             mag: gl.NEAREST,
             min: gl.NEAREST,
-            format: gl.RGB,
+            format: gl.RGBA,
             // TODO: Set limit for colours (1024)
             // src: new Uint8ClampedArray(3 * 1024), // support 1024 colours
             src: this.createColourTexture(), // support 256 colours
@@ -42,6 +42,7 @@ export default class Renderer {
 
         window.addEventListener("updateTileEvent", this.updateColours)
         requestAnimationFrame(() => this.render())
+        console.log("WebGL2 renderer initialised")
     }
 
     updateColours() {
@@ -49,13 +50,13 @@ export default class Renderer {
         let texture = this.createColourTexture()
         texture.set(Game.colours.flat(), 0)
         // twgl.setTextureFromArray(this.gl, this.colours, texture, {format: this.gl.RGB, width: 1024, height: 1})
-        twgl.setTextureFromArray(this.gl, this.colours, texture, {format: this.gl.RGB, width: 256, height: 1})
+        twgl.setTextureFromArray(this.gl, this.colours, texture, {format: this.gl.RGBA, width: 256, height: 1})
     }
 
     createColourTexture() {
         // return new Uint8ClampedArray(3 * Game.width * Game.height)
         // return new Uint8ClampedArray(3 * 1024) // support 1024 colours
-        return new Uint8ClampedArray(3 * 256) // support 256 colours
+        return new Uint8ClampedArray(4 * 256) // support 256 colours
     }
 
     render() {

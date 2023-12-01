@@ -3,9 +3,9 @@ type Point = {
     y: number
 }
 
-type RGB = [number, number, number]
+type RGBA = [number, number, number, number]
 
 type Save = {
-    gradient: [RGB, RGB]
+    gradient: [RGBA, RGBA]
     rules: string
 }

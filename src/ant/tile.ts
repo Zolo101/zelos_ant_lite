@@ -1,7 +1,7 @@
 class Tile {
     id: number
-    colour: RGB
-    // TODO: remove triggers
+    colour: RGBA
+    // TODO: remove trigger?
     trigger: string
 
     constructor(id: number, colour: Tile["colour"], trigger: string) {
