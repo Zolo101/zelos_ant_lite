@@ -286,7 +286,7 @@
                 <p class="text-green-600 text-xs font-bold">{renderMode}</p>
             {:else if renderMode === "WebGL2"}
                 <p class="text-teal-600 text-xs font-bold">{renderMode}</p>
-            {:else}
+            {:else if renderMode === "Nothing"}
                 <p class="text-red-600 text-xs font-bold">Your browser does not support WebGL2 :(</p>
             {/if}
         </div>
