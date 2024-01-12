@@ -1,6 +1,6 @@
 {
 	"name": "zelos.ant.lite",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"license": "MIT",
 	"keywords": [
 		"svelte",
@@ -18,6 +18,9 @@
 		"preview": "vite preview",
 		"check": "svelte-check --tsconfig tsconfig.json",
 		"check:watch": "svelte-check --tsconfig tsconfig.json --watch"
+	},
+	"peerDependencies": {
+		"svelte": "^4.0.0"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.1.1",
