@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Stats from "../component/Stats.svelte";
+    import Stats from "./Stats.svelte";
     import Game from "../ant/game";
     import Tile from "../ant/tile";
     import HashCanvas from "hashcanvas";
