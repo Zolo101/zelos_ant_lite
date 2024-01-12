@@ -1,7 +1,7 @@
 import Board from "./board";
 import Tile from "./tile";
 import { writable } from "svelte/store";
-import { canvas, iterate, renderer } from "./index";
+import { canvas, iterate } from "./index";
 import Ant from "./ant";
 
 const left = (ant: Ant) => ant.turnLeft();
@@ -33,6 +33,7 @@ class Game {
     // static iterationsPerTick: number = 100
     static iterationsPerTick: number = 100000
     static iterations = 0
+    static renderer: any;
 
     static restart() {
         Game.board.clear()
@@ -47,7 +48,7 @@ class Game {
     }
 
     static takePicture() {
-        renderer.render();
+        Game.renderer.render();
         return canvas.toDataURL();
     }
 
@@ -56,7 +57,7 @@ class Game {
 
         for (let i = 0; i < Game.iterationsPerTick; i++) iterate()
         Game.iterations += Game.iterationsPerTick
-        renderer.tiles = Game.board.cells
+        Game.renderer.updateTiles(Game.board.cells)
 
         Game.updateInProgress = false;
     }

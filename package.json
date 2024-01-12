@@ -37,6 +37,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"hashcanvas": "github:Zolo101/hashcanvas",
 		"twgl.js": "^5.5.3",
 		"webgl-lint": "^1.11.3"
 	},

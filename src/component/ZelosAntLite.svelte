@@ -1,11 +1,8 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import { main } from "../ant";
     import Stats from "../component/Stats.svelte";
     import Game from "../ant/game";
     import Tile from "../ant/tile";
-    import WebGPURenderer from "../ant/render/webgpu/webgpu";
-    import Renderer from "../ant/render/webgl2/webgl2";
+    import HashCanvas from "hashcanvas";
 
     const choose = <T>(choices: T[]) => choices[~~(Math.random() * choices.length)]
     $: x = [] as Array<Tile>;
@@ -58,25 +55,37 @@
         return !!gl;
     }
 
-    const isWebGPUSupported = () => !!navigator.gpu;
+    const isWebGPUSupported = () => {
+        const canvas = document.createElement("canvas")
+        const hasWebGPUDevice = !!navigator.gpu;
+        if (hasWebGPUDevice) {
+            return !!canvas.getContext("webgpu");
+        } else {
+            return false;
+        }
+    }
 
-    onMount(async () => {
+    const onCreation = (renderer: any, canvas: HTMLCanvasElement) => {
+        Game.renderer = renderer;
         dialog = document.querySelector("#help") as HTMLDialogElement;
-        const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
-        let renderer: Renderer | WebGPURenderer
+        // const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
+        // let renderer: Renderer | WebGPURenderer
+        // console.log(isWebGL2Supported(), isWebGPUSupported())
         if (isWebGPUSupported()) {
-            const glw = canvas.getContext("webgpu");
-            renderer = await main(null, glw)
+            // const glw = canvas.getContext("webgpu");
+            // renderer = await main(null, glw)
             renderMode = "WebGPU"
         } else if (isWebGL2Supported()) {
-            const gl2 = canvas.getContext("webgl2");
-            renderer = await main(gl2, null)
+            // const gl2 = canvas.getContext("webgl2");
+            // renderer = await main(gl2, null)
             renderMode = "WebGL2"
         } else {
             // TODO: Fallback to canvas
             renderMode = "Nothing"
             throw new Error("WebGL2 is not supported")
         }
+
+        console.log(renderer)
         // const ctx = canvas.getContext("canvas") as CanvasRenderingContext2D;
         // const gl2 = canvas.getContext("webgl2");
         // const renderer = await main(gl2, null)
@@ -107,7 +116,7 @@
                     Game.addTile(colours[i], choice);
                 }
             }
-            renderer.updateColours()
+            renderer.updateColours(Game.colours)
             x = Game.tiles
             Game.board.addAnt(Game.board.width / 2, Game.board.height / 2);
         }
@@ -199,7 +208,7 @@
         }
 
         generate()
-    })
+    }
 </script>
 <dialog id="help" class="max-md:bg-white/40 max-md:w-fit md:p-5 overflow-y-auto overscroll-y-contain outline-4 outline-black drop-shadow-lg rounded max-md:m-0">
     <!--    <p>zelo's ant lite</p>-->
@@ -278,7 +287,7 @@
     <!--    </div>-->
 </dialog>
 <div class="flex flex-col w-[400px] gap-1">
-    <canvas id="canvas" width="400" height="400"></canvas>
+    <HashCanvas width={400} height={400} {onCreation}/>
     <div class="flex justify-between text-xs">
         <div>
             <span>zelo's ant lite</span>
