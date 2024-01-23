@@ -1,6 +1,6 @@
 {
 	"name": "zelos.ant.lite",
-	"version": "0.5.0",
+	"version": "0.6.0",
 	"license": "MIT",
 	"keywords": [
 		"svelte",
@@ -16,7 +16,7 @@
 		"build": "npm run package",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
-		"postinstall": "npm run package",
+		"postinstall": "svelte-package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
