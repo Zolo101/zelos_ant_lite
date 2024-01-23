@@ -1,6 +1,6 @@
 {
 	"name": "zelos.ant.lite",
-	"version": "0.6.0",
+	"version": "0.7.0",
 	"license": "MIT",
 	"keywords": [
 		"svelte",
@@ -29,7 +29,6 @@
 		"svelte": "^4.0.0"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^3.1.1",
 		"@sveltejs/kit": "^2.4.3",
 		"@sveltejs/package": "^2.2.6",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
